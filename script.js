@@ -1,18 +1,18 @@
 
-async function calculateExchangeRate() {
-    const amount = document.getElementById('amount').value;
-    const currency = document.querySelector('input[name="currency"]:checked').value;
+async function calculateExchange() {
+  const amount = document.getElementById('amount').value;
+  const currency = document.querySelector('input[name="currency"]:checked').value;
 
-    // const apiUrl = `https://api.exchangerate-api.com/v4/latest/${currency.toUpperCase()}`;
-  const apiUrl =  `https://v6.exchangerate-api.com/v6/a24dcd3797a9928758b58953/latest/USD${currency.toUpperCase()}`;
-    // https://v6.exchangerate-api.com/v6/a24dcd3797a9928758b58953/latest/USD
+  // Fetch exchange rate from the Frankfurter API
+  const apiUrl = `https://api.frankfurter.app/latest?from=${currency}`;
+  const response = await fetch(apiUrl);
+  const data = await response.json();
 
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+  // Extract exchange rate for the selected currency
+  const exchangeRate = data.rates[currency === 'USD' ? 'ZAR' : 'USD'];
 
-    const exchangeRate = data.rates.USD;
-
-    const resultContainer = document.getElementById('result');
-    resultContainer.innerHTML = `Exchange Rate: 1 ${currency.toUpperCase()} = ${exchangeRate} USD<br>`;
-    // resultContainer.innerHTML += `Converted Amount: ${amount} ${currency.toUpperCase()} = ${(amount * exchangeRate)} USD`;
-    resultContainer.innerHTML += `Converted Amount: ${amount} ${currency.toUpperCase()} = ${(amount * exchangeRate).toFixed(2)} USD`;}
+  // Display the result
+  const resultContainer = document.getElementById('result');
+  resultContainer.innerHTML = `Exchange Rate: 1 ${currency} = ${exchangeRate.toFixed(2)} ${currency === 'USD' ? 'ZAR' : 'USD'}<br>`;
+  resultContainer.innerHTML += `Converted Amount: ${amount} ${currency} = ${(amount * exchangeRate).toFixed(2)} ${currency === 'USD' ? 'ZAR' : 'USD'}`;
+}

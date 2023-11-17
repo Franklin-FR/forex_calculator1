@@ -8,24 +8,23 @@
     <title>Document</title>
 </head>
 <body>
-     <h1>Exchange Rate Calculator</h1>
-  
-  <label for="amount">Enter Amount:</label>
-  <input type="number" id="amount" placeholder="Enter amount" />
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" placeholder="Enter amount">
 
-  <label>
-    <input type="radio" name="currency" value="usd" checked />
-    USD
-  </label>
-  
-  <label>
-    <input type="radio" name="currency" value="naira" />
-    Naira
-  </label>
+  <br>
 
-  <button onclick="calculateExchangeRate()">Calculate</button>
+  <input type="radio" name="currency" value="USD" id="usd">
+  <label for="usd">USD</label>
+
+  <input type="radio" name="currency" value="ZAR" id="zar">
+  <label for="zar">ZAR</label>
+
+  <br>
+
+  <button onclick="calculateExchange()">Calculate Exchange</button>
 
   <div id="result"></div>
+
 
     <script src="./script.js"></script>
 </body>
